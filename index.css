@@ -1,0 +1,282 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Staatliches&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*:focus {
+ outline: none;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+}
+body {
+ display: flex;
+ align-items: stretch;
+ justify-content: center;
+}
+#upload, #dynamic {display: none;}
+main {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+header {
+  width: 100%;
+  height: auto;
+  background: rgb(38,50,56);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+header h1 {
+  color: white;
+  padding: 10px;
+  font-family: "Staatliches", sans-serif;
+  letter-spacing: 2px;
+  width: 90%;
+}
+header button {
+ width: 10%;
+ font-size: 1.2rem;
+ margin: 5px;
+ border-radius: 2px;
+ border: none;
+ background: dodgerblue;
+ color: white;
+}
+.main {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+.stickyTop {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1;
+}
+.video-player {
+  width: 100%;
+  height: 40vh;
+  min-height: 20px;
+  position: relative;
+}
+.video-player #video {
+  width: 100%;
+  height: 100%;
+  position: static;
+  display: block;
+}
+.video-player .controller {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.6s;
+  background: linear-gradient(360deg, rgba(0,0,0,.23), transparent);
+}
+.video-player .controller:hover {
+ opacity: 1;
+}
+.controller .btns {
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-around;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.controller .btns button {
+  width: 33.33%;
+  padding: 5px;
+  font-size: 1.7rem;
+  background: transparent;
+  border: none;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(38, 45, 23);
+}
+.controller .btns button:focus {
+  outline: none;
+}
+.controller .rangeAndTime {
+  width: 100%;
+  height: auto;
+}
+.controller .rangeAndTime .text {
+  margin: auto;
+  width: 96%;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+}
+.controller .rangeAndTime .text p {
+  width: 50%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 10px;
+  font-size: 1.2rem;
+  font-family: "Poppins", sans-serif;
+  color: white;
+  letter-spacing: 2px;
+}
+.controller .rangeAndTime .text button {
+ width: 5%;
+ text-align: center;
+ font-size: 1.3rem;
+ border: none;
+ background: transparent;
+ color: white;
+}
+.controller .rangeAndTime .text .duration {
+  text-align: right;
+  width: calc(50% - 5%);
+}
+.controller .rangeAndTime .range-container {
+  padding-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.controller .rangeAndTime .range-container #range {
+  width: 90%;
+  height: auto;
+  background: rgba(255,255,255,.35);
+}
+.controller .rangeAndTime .range-container #range .value {
+  height: 6px;
+  width: 100%;
+  background: rgb(25, 45, 67);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+}
+.controller .rangeAndTime .range-container #range .value #dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: rgb(25, 45, 67);
+  right: -6px;
+  display: block;
+  border-radius: 50%;
+}
+.videos-playlist {
+  padding: 5px 5px;
+  margin: auto;
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 50% calc(50% - 5px);
+  grid-template-rows: auto;
+}
+.controller .volume {
+ position: absolute;
+ top: 0;
+ right: 0px;
+ padding: 10px;
+ border: none;
+ background: rgba(0,0,0,.85);
+ color: white;
+ font-size: 1.5rem;
+}
+.videos-playlist section {
+  height: auto;
+  min-height: 200px;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.videos-playlist section p {
+  width: auto;
+  max-width: 70%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background: lightgrey;
+  font-family: "Poppins";
+  padding: 5px;
+  border-radius: 300px;
+}
+.videos-playlist section.active {
+ border: 2px solid rgb(38,50,56) !important;
+}
+.videos-playlist section.active p {
+ background: rgba(38,50,56);
+ color: white;
+}
+.title-and-description {
+ width: 100%;
+ height: auto;
+ overflow: hidden;
+ border-top: 1px solid grey;
+ border-bottom: 1px solid grey;
+ box-shadow: 0px 2px 3px rgba(0,0,0,.23);
+ position: relative;
+ z-index: 10;
+}
+.title-and-description .title {
+ width: 100%;
+ display: flex;
+ align-items: stretch;
+ justify-content: space-between;
+}
+.title-and-description .title h2 {
+ font-family: sans-serif;
+ font-size: 1.5rem;
+ font-weight: 400;
+ padding: 10px;
+ width: 90%;
+ height: 100%;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ white-space: nowrap;
+ display: flex;
+ align-items: center;
+ justify-content: flex-start;
+}
+.title-and-description .title button {
+ width: 10%;
+ font-size: 1.5rem;
+ border: none;
+ background: transparent;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+@media screen and (min-width: 900px) {
+body {
+ background: grey;
+}
+ .video-player {
+  height: 39vh;
+ } 
+ .controller .btns {
+  width: 30%!important;
+ }
+  .videos-playlist {
+   grid-template-columns: 33.33% 33.33% calc(33.33% - 10px) !important; 
+  grid-template-rows: auto;
+  }
+  main {
+   background: white;
+  }
+}
