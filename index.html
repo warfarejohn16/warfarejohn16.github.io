@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Playlist</title>
+  <link rel="stylesheet" href="index.css"/>
+</head> 
+
+<body>
+  <video id="dynamic" controls></video>
+  <input id="upload" type="file" accept="video/*"/>
+ <main>
+   <header>
+     <h1>NaCow.io</h1>
+     <button class="uploadBtn">
+      <i class="fas fa-upload"></i>
+     </button>
+   </header>
+   <div class="main">
+     <div class="stickyTop">
+     <div class="video-player">
+       <canvas id="video"></canvas>
+       <div class="controller">
+        <button class="volume"><i class="fas fa-volume-up"></i></button>
+         <div class="btns">
+           <button><i class="fas fa-undo skip"></i></button> 
+           <button><i class="fas fa-play play"></i></button>
+           <button><i class="fas fa-redo skip"></i></button>
+         </div> 
+         <div class="rangeAndTime">
+           <div class="text">
+             <p class="niger current">0:00</p>
+             <p class="niger duration">0:00</p>
+             <button><i class="fas fa-expand screen"></i></button>
+           </div>
+           <div class="range-container">
+             <div id="range">
+              <div class="value">
+                <span id="dot"></span>
+              </div>
+             </div>
+           </div> 
+         </div>
+       </div>
+     </div>
+     </div>
+     <div class="title-and-description">
+     <div class="title">
+      <h2 id="title">Title is here</h2>
+      <button><i class="fas fa-angle-down"></i></button>
+     </div>
+     </div>
+     <div class="videos-playlist">
+     </div>
+   </div>
+ </main>
+ <script src="index.js"></script>
+</body>
+
+</html>
