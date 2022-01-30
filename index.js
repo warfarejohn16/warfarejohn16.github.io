@@ -1,6 +1,12 @@
 "use strict"
 //This is a complex nacow background happening.
 const canvas = document.querySelector(".video-player #video");
+window.devicePixelRatio = 4.567;
+let pixel = window.devicePixelRatio;
+canvas.width = Math.floor(canvas.width * pixel);
+canvas.width = Math.floor(canvas.height * pixel);
+canvas.style.width = `100%`;
+canvas.style.height = `100%`;
 let ctx = canvas.getContext("2d");
 const screen = document.querySelector(".screen");
 const videoContainer = document.querySelector(".video-player");
@@ -21,13 +27,21 @@ const title = document.getElementById("title");
 const uploadBtn = document.querySelector(".uploadBtn");
 let width = parseInt(getComputedStyle( range, null ).getPropertyValue("width"));
 let videos = [], names = [];
-function updateContent() {
+function updateContent() { 
  if(video.paused) cancelAnimationFrame(updateContent)
  if(video.play) requestAnimationFrame(updateContent)
  ctx.clearRect(0,0, canvas.width, canvas.height);
  ctx.imageSmoothingEnabled = true;
- ctx.imageSmoothingQuality = "high"; 
+ ctx.imageSmoothingQuality = "high";
  ctx.drawImage(video, 0,0, canvas.width, canvas.height);
+ let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height); 
+ let data = imgData.data;
+ for(let i = 0; i < data.length; i+=4) {
+  data[i] = data[i] + 5.1;
+  data[i + 1] = data[i + 1] + 1.1;
+  data[i + 2] = data[i + 2] + 5.1; 
+ }
+ ctx.putImageData(imgData, 0, 0); 
 }
 let i = -1;
 function playListIteration() {
@@ -105,17 +119,6 @@ function videoContent(i) {
  title.innerText = names[i];
  timer();
 }
-/*function changeValue(e) {
- if(video.src === "") {
-  console.log("Don\'t have any video sources.")
- } else {
-  let xes = Math.floor(e.targetTouches[0].clientX * 100 / width - 6);
-  if(xes <= 0) xes = 0;
-  if(xes >= 100) xes = 100;
-  video.currentTime = xes*video.duration /100;
-  value.style.width = `${xes}%`;
-  }
-}*/
 
 range.addEventListener("touchmove", function(event) {
  if(video.src === "") {
