@@ -1,15 +1,8 @@
 "use strict"
 //This is a complex nacow background happening.
-const canvas = document.querySelector(".video-player #video");
-window.devicePixelRatio = 4.567;
-let pixel = window.devicePixelRatio;
-canvas.width = Math.floor(canvas.width * pixel);
-canvas.width = Math.floor(canvas.height * pixel);
-canvas.style.width = `100%`;
-canvas.style.height = `100%`;
-let ctx = canvas.getContext("2d");
 const screen = document.querySelector(".screen");
 const videoContainer = document.querySelector(".video-player");
+const controller = document.querySelector(".video-player .controller");
 const volume = document.querySelector(".volume");
 const skip = document.querySelectorAll(".skip")
 const timerP = document.querySelectorAll(".niger")
@@ -27,22 +20,6 @@ const title = document.getElementById("title");
 const uploadBtn = document.querySelector(".uploadBtn");
 let width = parseInt(getComputedStyle( range, null ).getPropertyValue("width"));
 let videos = [], names = [];
-function updateContent() { 
- if(video.paused) cancelAnimationFrame(updateContent)
- if(video.play) requestAnimationFrame(updateContent)
- ctx.clearRect(0,0, canvas.width, canvas.height);
- ctx.imageSmoothingEnabled = true;
- ctx.imageSmoothingQuality = "high";
- ctx.drawImage(video, 0,0, canvas.width, canvas.height);
- let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height); 
- let data = imgData.data;
- for(let i = 0; i < data.length; i+=4) {
-  data[i] = data[i] + 5.1;
-  data[i + 1] = data[i + 1] + 1.1;
-  data[i + 2] = data[i + 2] + 5.1; 
- }
- ctx.putImageData(imgData, 0, 0); 
-}
 let i = -1;
 function playListIteration() {
   if(videos.length < 0) console.log("have no links")
@@ -89,7 +66,7 @@ video.addEventListener("loadeddata", function() {
 });
 video.addEventListener("timeupdate", function() {
  updateDuration();
- timer();
+ timer(); 
 })
 function updateList() {
  const file = upload.files[0];
@@ -191,3 +168,21 @@ screen.addEventListener("click", function() {
   boolean_2 = true;
  }
 });
+let bool_2 = false;
+function openController() {
+ if(!bool_2) {
+  controller.style.opacity = 1;
+  bool_2 = true;
+ } else {
+  controller.style.opacity = 0;
+  bool_2 = false;
+ }
+}
+
+videoContainer.addEventListener("click", function() {
+ openController();
+})
+videoContainer.addEventListener("mouseout", function() {
+ bool_2 = true;
+ openController();
+})
