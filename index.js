@@ -160,11 +160,13 @@ volume.addEventListener("click", function() {
 screen.addEventListener("click", function() {
  if(boolean_2) {
   videoContainer.requestFullscreen();
+  video.style.height = "100%";
   screen.setAttribute("class","fas fa-compress screen");
   boolean_2 = false;
  } else {
   document.exitFullscreen();
   screen.setAttribute("class","fas fa-expand screen");
+  video.style.height ="45vh";
   boolean_2 = true;
  }
 });
